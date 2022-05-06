@@ -54,7 +54,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: prod-$CLR
+                name: canary-$CLR-prod
                 port:
                   number: 80
 #                  number: $PRT
