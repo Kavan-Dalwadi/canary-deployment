@@ -21,7 +21,7 @@ jobs:
       run: |
        export CLR=green
        export BRANCH=stage
-       export PRT=30080
+       export PRT=30081
        export PERCENT=25
        envsubst < ./manifest.yml | kubectl apply -f -
        kubectl rollout restart deployment canary-green
