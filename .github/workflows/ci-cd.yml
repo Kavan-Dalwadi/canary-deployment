@@ -19,6 +19,7 @@ jobs:
     - uses: actions/checkout@v3       
     - name: Restart K8s Deployment
       run: |
+       pwd && ls
        export CLR=green
        export BRANCH=stage
        export PRT=30081
@@ -39,6 +40,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Restart K8s Deployment
       run: |
+       pwd && ls
        export CLR=blue
        export BRANCH=prod
        export PRT=30080
