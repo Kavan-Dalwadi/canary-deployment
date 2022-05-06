@@ -1,8 +1,6 @@
 name: Docker Image CI
 
 on:
-  push:
-     branches: [ main ]
   pull_request_target:
     types:
       - closed
@@ -31,7 +29,7 @@ jobs:
   deploy:
 
     runs-on: self-hosted
-#    if:  startsWith(github.head_ref, 'stage')
+    if:  startsWith(github.head_ref, 'stage')
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
