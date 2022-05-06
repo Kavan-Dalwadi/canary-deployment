@@ -41,11 +41,11 @@ metadata:
   name: canary-$CLR-prod
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
-    kubernetes.io/ingress.class: nginx
+#    kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/canary: "true"
     nginx.ingress.kubernetes.io/canary-weight: "$PERCENT"    
 spec:
-#  ingressClassName: nginx
+  ingressClassName: nginx
   rules:
     - host: canary-demo.sa
       http:
