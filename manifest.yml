@@ -26,14 +26,14 @@ kind: Service
 metadata:
     name: canary-$CLR-prod
 spec:
-    type: NodePort
+#    type: NodePort
     selector:
         app: canary
         env: $CLR
     ports:
         - port: 5000
           targetPort: 5000
-          nodePort: $PRT
+#          nodePort: $PRT
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -56,6 +56,6 @@ spec:
               service:
                 name: prod-$CLR
                 port:
-#                  number: 5000
-                  number: $PRT
+                  number: 5000
+#                  number: $PRT
 ...                  
