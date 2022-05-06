@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-    name: prod-$CLR-deploy
+    name: canary-$CLR
 spec:
     selector:
         matchLabels:
@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-    name: prod-$CLR-svc
+    name: canary-$CLR-prod
 spec:
 #    type: NodePort
     selector:
@@ -38,7 +38,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: prod-$CLR-ingress
+  name: canary-$CLR-prod
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$1
     kubernetes.io/ingress.class: nginx
