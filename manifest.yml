@@ -26,7 +26,7 @@ kind: Service
 metadata:
     name: canary-$CLR-prod
 spec:
-#    type: NodePort
+    type: LoadBalancer
     selector:
         app: canary
         env: $CLR
