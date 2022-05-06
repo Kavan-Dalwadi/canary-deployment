@@ -26,7 +26,7 @@ jobs:
        export PRT=30080
        export PERCENT=25
        envsubst < ./manifest.yml | kubectl apply -f -
-       kubectl rollout restart deployment prod-green
+       kubectl rollout restart deployment canary-green
  
   deploy:
 
@@ -46,4 +46,4 @@ jobs:
        export PRT=30080
        export PERCENT=75
        envsubst < ./manifest.yml | kubectl apply -f -
-       kubectl rollout restart deployment prod-blue
+       kubectl rollout restart deployment canary-blue
