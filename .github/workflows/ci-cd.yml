@@ -1,0 +1,49 @@
+name: Docker Image CI
+
+on:
+  push:
+     branches: [ main ]
+  pull_request_target:
+    types:
+      - closed
+
+jobs:
+
+  stage:
+    if:  startsWith(github.head_ref, 'dev')
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+       docker build ./app/ --tag kdalwadi28/nginx-stage
+       docker push kdalwadi28/nginx-stage
+    - uses: actions/checkout@v3       
+    - name: Restart K8s Deployment
+      run: |
+       export CLR=green
+       export BRANCH=stage
+       export PRT=30080
+       export PERCENT=25
+       envsubst < ./manifest.yml | kubectl apply -f -
+       kubectl rollout restart deployment prod-green
+ 
+  deploy:
+
+    runs-on: self-hosted
+#    if:  startsWith(github.head_ref, 'stage')
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: |
+       docker build ./app/ --tag kdalwadi28/nginx-prod
+       docker push kdalwadi28/nginx-prod
+    - uses: actions/checkout@v3
+    - name: Restart K8s Deployment
+      run: |
+       export CLR=blue
+       export BRANCH=prod
+       export PRT=30080
+       export PERCENT=75
+       envsubst < ./manifest.yml | kubectl apply -f -
+       kubectl rollout restart deployment prod-blue
