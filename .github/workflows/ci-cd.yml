@@ -1,25 +1,32 @@
-name: Docker Image CI
+name: Changelog CI
 
 on:
-  push:
-    branches:
-      - "dev"
-  # pull_request_target:
-  #   types:
-  #     - closed
+  pull_request:
+    types: [ opened ]
 
 jobs:
-  generate_changelog:
-    permissions:
-      id-token: write
-      contents: read
-    runs-on: 'ubuntu-latest'
+  build:
+    runs-on: ubuntu-latest
+
     steps:
-    - name: "Build Changelog"
-      id: build_changelog
-      uses: mikepenz/release-changelog-builder-action@v4.1.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GENERATE_CHANGELOG_GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+
+      - name: Run Changelog CI
+        uses: saadmk11/changelog-ci@v1.1.2
+
+
+
+# name: Docker Image CI
+
+# on:
+#   push:
+#     branches:
+#       - "dev"
+#   # pull_request_target:
+#   #   types:
+#   #     - closed
+
+# jobs:
 
   # stage:
   #   if:  startsWith(github.head_ref, 'dev')
