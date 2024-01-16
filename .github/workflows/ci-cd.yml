@@ -1,9 +1,12 @@
 name: Docker Image CI
 
 on:
-  pull_request_target:
-    types:
-      - closed
+  push:
+    branches:
+      - "dev"
+  # pull_request_target:
+  #   types:
+  #     - closed
 
 jobs:
   generate_changelog:
