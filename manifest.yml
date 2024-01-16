@@ -7,7 +7,7 @@ spec:
         matchLabels:
             app: canary
             env: $CLR
-    replicas: 1
+    replicas: 2
     template:
         metadata:
             labels:
