@@ -15,6 +15,8 @@ jobs:
     - name: "Build Changelog"
       id: build_changelog
       uses: mikepenz/release-changelog-builder-action@v4.1.1
+      env:
+        GITHUB_TOKEN: ${{ secret.GENERATE_CHANGELOG_GITHUB_TOKEN }}
 
   # stage:
   #   if:  startsWith(github.head_ref, 'dev')
