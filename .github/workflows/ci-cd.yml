@@ -1,8 +1,9 @@
 name: Changelog CI
 
 on:
-  pull_request:
-    types: [ opened ]
+  push:
+    branches:
+      - "main"
 
 jobs:
   build:
@@ -11,10 +12,20 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - id: 'install_python'
+        name: 'Set up Python requirements'
+        run: 'pip3 install -r ./scripts/requirements.txt
+
+      - id: 'increase_version'
+        name: 'Bump version using semver'
+        run: |-
+          echo "NEW_IMAGE=$(python3 ./scripts/bump_version_semver.py 0.1.0 COMMIT_HEAD)" >> $GITHUB_ENV
+
       - name: Run Changelog CI
         uses: saadmk11/changelog-ci@v1.1.2
         with:
           github_token: ${{ secrets.GENERATE_CHANGELOG_GITHUB_TOKEN }}
+          release_version: ${{ env.NEW_IMAGE }}
 
 
 
