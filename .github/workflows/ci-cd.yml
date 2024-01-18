@@ -21,7 +21,7 @@ jobs:
       - id: 'increase_version'
         name: 'Bump version using semver'
         run: |-
-          echo "NEW_IMAGE=$(python3 ./scripts/bump_version_semver.py 0.1.0 COMMIT_HEAD)" >> $GITHUB_ENV
+          echo "NEW_IMAGE=$(python3 ./scripts/bump_version_semver.py 0.1.1 COMMIT_HEAD)" >> $GITHUB_ENV
 
       - name: Run Changelog CI
         uses: saadmk11/changelog-ci@v1.1.2
