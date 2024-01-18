@@ -11,10 +11,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-
+      
       - id: 'install_python'
         name: 'Set up Python requirements'
-        run: 'pip3 install -r ./scripts/requirements.txt
+        run: 'pip3 install -r ./scripts/requirements.txt'
 
       - id: 'increase_version'
         name: 'Bump version using semver'
