@@ -11,25 +11,14 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    environment: development
     steps:
       - uses: actions/checkout@v2
       
-      - id: 'install_python'
-        name: 'Set up Python requirements'
-        run: 'pip3 install -r ./scripts/requirements.txt'
-
-      - id: 'increase_version'
-        name: 'Bump version using semver'
-        run: |-
-          echo "NEW_IMAGE=$(python3 ./scripts/bump_version_semver.py 0.1.1 COMMIT_HEAD)" >> $GITHUB_ENV
-
-      - name: Run Changelog CI
-        uses: saadmk11/changelog-ci@v1.1.2
-        with:
-          github_token: ${{ secrets.GENERATE_CHANGELOG_GITHUB_TOKEN }}
-          release_version: ${{ env.NEW_IMAGE }}
-          config_file: changelog-ci-config.yaml
+      - name: 'Convert secret into file'
+        run: |
+          echo {{ secrets.SSH_PUBLIC_KEY }} > gcp_vm.pub
+          cat gcp_vm.pub
 
 
 
