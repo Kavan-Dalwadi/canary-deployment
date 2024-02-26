@@ -17,7 +17,7 @@ jobs:
       
       - name: 'Convert secret into file'
         run: |
-          echo {{ secrets.SSH_PUBLIC_KEY }} > gcp_vm.pub
+          echo ${{ secrets.SSH_PUBLIC_KEY }} > gcp_vm.pub
           cat gcp_vm.pub
 
 
